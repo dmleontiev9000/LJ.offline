@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets network
+QT       += core gui widgets network websockets sql
 CONFIG   += c++11
 
 TARGET = LJ_offline
@@ -12,11 +12,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        widget.cpp
+    engine.cpp \
+    socketwrapper.cpp
 
-HEADERS  += widget.h
+HEADERS  += \
+    engine.h \
+    socketwrapper.h
 
 DISTFILES += \
     web/processing.js \
     web/style.css \
     web/index.html
+
+RESOURCES += \
+    resources.qrc

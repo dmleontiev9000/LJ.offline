@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/conf.png</file>
+        <file>icons/lj.png</file>
+        <file>icons/sync.png</file>
+    </qresource>
+</RCC>
