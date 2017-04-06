@@ -36,10 +36,11 @@ ConfDialog::ConfDialog(QSettings& _settings, Engine * e)
     grid = new QGridLayout(lj_box);
     //layout = new QGridLayout(lj_box);
     label = new QLabel(tr("<h2>Warning!</h2>"
-                                     "your password will be stored as<br>"
-                                     "plain text. Do not enter password<br>"
-                                     "if you are not confident in PC you<br>"
-                                     "are working on"));
+                          "your password will be stored as<br>"
+                          "plain text. Do not enter password<br>"
+                          "if you are not confident in PC you<br>"
+                          "are working on. You will still be<br>"
+                          "able to read and download LJ entries."));
     grid->addWidget(label, 0, 0, 1, 2);
     label = new QLabel(tr("Livejournal login"));
     grid->addWidget(label, 1, 0, 1, 1, Qt::AlignRight);
