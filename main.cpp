@@ -23,6 +23,11 @@ int main(int argc, char *argv[])
 
     menu->addAction(QIcon(":/icons/lj.png"), a.translate("menu", "open browser"),
                     engine, SLOT(showInBrowser()));
+    QObject::connect(icon, &QSystemTrayIcon::activated, [=] (QSystemTrayIcon::ActivationReason reason) {
+        if (reason == QSystemTrayIcon::DoubleClick)
+            engine->showInBrowser();
+    });
+
     menu->addSeparator();
     menu->addAction(QIcon(":/icons/conf.png"), a.translate("menu", "configuration"),
                     engine, SLOT(showConfigDialog()));
