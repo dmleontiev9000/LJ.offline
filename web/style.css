@@ -1,0 +1,104 @@
+html,body {
+height:100%;
+padding:0;
+margin:0;
+}
+.overlay {
+    z-index: 100;
+    position:absolute;
+    left:0px;
+    right:0px;
+    top:0px;
+    bottom:0px;
+    background: rgb(0,0,0);
+    font-family: "Times New Roman", Times, sans-serif;
+    font-size:36px;
+    font-weight:bold;
+    color: rgb(255,255,255);
+}
+.centered {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+}
+.hidden {
+    visibility:hidden;
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:0px;
+    height:0px;
+}
+.logo {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:300px;
+    height:130px;
+}
+.title {
+    position:absolute;
+    left:300px;
+    right:0px;
+    top:0px;
+    height:60px;
+}
+.title_text {
+    margin:15px;
+    font-family: "Times New Roman", Times, sans-serif;
+    font-size:36px;
+    font-weight:bold;
+    color: rgb(0,0,0);
+}
+.toolbar {
+    position:absolute;
+    left:300px;
+    right:0px;
+    top:60px;
+    height:70px;
+}
+.toolbar button {
+    background-color: #F8F8F8;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 12px;
+}
+.toolbar button img {
+    width:20px;
+    height:20px;
+}
+.toolbar button:hover {
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+}
+.warning {
+    color: rgb(255,192,192);
+}
+.desk {
+    position:absolute;
+    left:0px;
+    right:0px;
+    top:130px;
+    bottom:0px;
+}
+.left {
+    position:absolute;
+    left:0px;
+    top:0px;
+    bottom:0px;
+    overflow:scroll;
+}
+.right {
+    position:absolute;
+    right:0px;
+    top:0px;
+    bottom:0px;
+}
+.handle {
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    width: 6px;
+    background: rgb(128,128,128);
+    cursor: col-resize;
+}
+

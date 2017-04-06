@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/mint-choc/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="processing.js"></script>
+</head>
+<body>
+
+<div id="overlay" class="overlay">
+    <div id="overlay_data" class="centered">
+        Loading...
+    </div>
+</div>
+
+<div class="logo"><img src="img/logo.png"></div>
+<div class="title"><p class="title_text">Livejournal Offline</p></div>
+<div class="toolbar">
+    <button id="addj"><img src="img/add.png">Добавить журнал</button>
+    <button id="sync"><img src="img/sync.png">Синхронизироваться</button>
+    <button id="conf"><img src="img/properties.png">Настройки</button>
+</div>
+
+<div class="desk">
+    <div id="left" class="left">
+    </div>
+    <div id="deskhandle"  class="handle" draggable="true">
+    </div>
+    <div id="right" class="right">
+    </div>
+</div>
+
+<div class="hidden">
+
+<!-- диалог -->
+<div id="add_journal">
+    <p class="text">Выберите журнал для сохранения</p>
+    <input type="text" id="journal_name" style="width:100%"><br>
+    <p class="warning" id="warning1"></p>
+    <p class="text">Опции сохранения</p>
+    <input type="checkbox" id="saveimg1">Сохранять изображения
+</div>
+<div id="conf_dialog">
+    <p class="text">Хранилище данных</p>
+    <input type="text" id="db_name" style="width:100%"><br>
+    <p class="text">Опции сохранения</p>
+    <input type="checkbox" id="saveimg2">Сохранять изображения
+</div>
+
+</body>
+</html>
