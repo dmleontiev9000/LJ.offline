@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     a.setApplicationVersion("1.0");
     a.setOrganizationName("ckotinko");
     a.setOrganizationDomain("ckotinko.ru");
+    a.setQuitOnLastWindowClosed(false);
 
     QSettings settings;
     settings.beginGroup("LJ_offline");
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
                     &a, SLOT(quit()));
     icon->setContextMenu(menu);
     icon->show();
+
     int retc = a.exec();
 
     delete icon;
