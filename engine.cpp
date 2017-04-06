@@ -77,23 +77,22 @@ void Engine::newHttpReq() {
     connect(socket, SIGNAL(disconnected()), this, SLOT(httpConnClosed()));
     connect(socket, SIGNAL(readyRead()), this, SLOT(httpDataReceived()));
 
-    if (socket->bytesAvailable())
-        httpDataReceived(socket);
+    if (socket->bytesAvailable()) {
+        while (socket->canReadLine())
+            httpDataReceived(socket);
+    }
 }
 
 void Engine::httpDataReceived() {
     QTcpSocket * socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) return;
-    httpDataReceived(socket);
+    while (socket->canReadLine())
+        httpDataReceived(socket);
 }
 
 void Engine::httpDataReceived(QTcpSocket *socket) {
-    if (!socket->canReadLine())
-        return;
-
     const int L = 1024;
     char buffer[L];
-
 
     do {//reading first line of request
         qint64 len = socket->readLine(buffer, L);
@@ -101,17 +100,21 @@ void Engine::httpDataReceived(QTcpSocket *socket) {
             break;
         buffer[L-1] = 0;
 
+        qDebug("<< %s", qPrintable(buffer));
         //empty line received, find and send file
-        if (buffer[0]=='\n') {
+        if (buffer[0]=='\n' || (buffer[0]=='\r' && buffer[1]=='\n')) {
+            qDebug()<<"empty line received";
             QVariant v = socket->property("url");
             if (v.isNull())
                 break;
 
             QString newpath = server_path + v.toString();
+            qDebug()<<"returning "<<newpath;
             if (!QFile::exists(newpath)) {
                 socket->write("HTTP/1.0 404 not found\r\n\r\n");
                 return;
             }
+
             QFile file(newpath);
             if (!file.open(QIODevice::ReadOnly)) {
                 socket->write("HTTP/1.0 403 forbidden\r\n\r\n");
@@ -147,6 +150,12 @@ void Engine::httpDataReceived(QTcpSocket *socket) {
             return;
         }
 
+        //check if it is a header
+        QVariant v = socket->property("url");
+        if (!v.isNull())
+            return;
+
+
         char * next;
         if ((0x20|buffer[0]) == 'g' &&
             (0x20|buffer[1]) == 'e' &&
@@ -175,6 +184,8 @@ void Engine::httpDataReceived(QTcpSocket *socket) {
             //skip hostname and port, if any
             for(;;) {
                 char cc = *next;
+                if (cc == '?' || cc == '#')
+                    cc = ' ';
                 if (!cc || cc == '/' || isspace(cc))
                     break;
                 ++next;
@@ -204,6 +215,8 @@ void Engine::httpDataReceived(QTcpSocket *socket) {
             //we also stop on non-ascii characters, any whitespace character
             //or control symbols(00-1f)
             char cc = *c;
+            if (cc == '?' || cc == '#')
+                cc = ' ';
             if (cc <= 0x20 || cc & 0x80 || isspace(cc)) {
                 *c = 0;
                 break;
