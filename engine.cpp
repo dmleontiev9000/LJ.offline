@@ -100,16 +100,13 @@ void Engine::httpDataReceived(QTcpSocket *socket) {
             break;
         buffer[L-1] = 0;
 
-        qDebug("<< %s", qPrintable(buffer));
         //empty line received, find and send file
         if (buffer[0]=='\n' || (buffer[0]=='\r' && buffer[1]=='\n')) {
-            qDebug()<<"empty line received";
             QVariant v = socket->property("url");
             if (v.isNull())
                 break;
 
             QString newpath = server_path + v.toString();
-            qDebug()<<"returning "<<newpath;
             if (!QFile::exists(newpath)) {
                 socket->write("HTTP/1.0 404 not found\r\n\r\n");
                 return;
