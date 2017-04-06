@@ -13,11 +13,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     engine.cpp \
-    socketwrapper.cpp
+    socketwrapper.cpp \
+    dialog.cpp \
+    filebackend.cpp \
+    dbbackend.cpp \
+    backend.cpp
 
 HEADERS  += \
     engine.h \
-    socketwrapper.h
+    socketwrapper.h \
+    dialog.h \
+    filebackend.h \
+    dbbackend.h \
+    backend.h
 
 DISTFILES += \
     web/processing.js \
